@@ -1,5 +1,4 @@
 from django.core.paginator import Paginator
-from django.core.mail import send_mail
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -110,12 +109,6 @@ class PostCreateView(PostValidMixin, LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         username = self.request.user.username
-        send_mail(
-                subject='Вы опубликовали пост',
-                message='Спасибо что пользуетесь "Блогикум"',
-                from_email='blog_form@blogicum.not',
-                recipient_list=['user@blogicum.not'],
-                fail_silently=True,)
         return reverse('blog:profile', args=[username])
 
 
